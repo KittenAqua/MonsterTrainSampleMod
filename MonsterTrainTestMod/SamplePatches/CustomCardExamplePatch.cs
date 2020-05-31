@@ -11,25 +11,11 @@ namespace MonsterTrainTestMod.SamplePatches
     [HarmonyPatch(typeof(SaveManager), "Initialize")]
     class RegisterNotHornBreak
     {
-        // Creates a 2-cost, 12 damage spell named "Not Horn Break" with Flash Freeze's art
+        // Creates a 2-cost, 12 damage Awoken spell named "Not Horn Break" with Flash Freeze's art
         static void Postfix(ref SaveManager __instance)
         {
             AllGameData allGameData = __instance.GetAllGameData();
             NotHornBreakDataCreator.CreateCardData(allGameData);
-        }
-    }
-
-    [HarmonyPatch(typeof(SaveManager), "SetupRun")]
-    class AddNotHornBreakToStartingDeck
-    {
-        // Adds Not Horn Break to the player's starting deck if the primary class is Awoken.
-        static void Postfix(ref SaveManager __instance)
-        {
-            if (CustomCardManager.CurrentPrimaryClan().GetTitle() == "Awoken")
-            {
-                var notHornBreakCardData = CustomCardManager.GetCardDataByID("NotHornBreak");
-                __instance.AddCardToDeck(notHornBreakCardData, null, false, false, false, true, true);
-            }
         }
     }
 
@@ -51,6 +37,7 @@ namespace MonsterTrainTestMod.SamplePatches
                 "52471f4f40ea12d4a9a80a91f211fd07"
             );
             cardDataBuilder.SetCardClan(MTClan.Awoken, allGameData);
+            cardDataBuilder.AddToCardPool(MTCardPool.StandardPool);
 
             var damageEffect = new CardEffectData();
             AccessTools.Field(typeof(CardEffectData), "effectStateName")
