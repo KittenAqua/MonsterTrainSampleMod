@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HarmonyLib;
+using MonsterTrainModdingAPI.Builder;
 
 namespace MonsterTrainTestMod.SamplePatches
 {
@@ -48,11 +49,19 @@ namespace MonsterTrainTestMod.SamplePatches
                 // Add the Frostbite effect to Frozen Lance's card effect list
                 setCardData.GetEffects().Add(frostbiteEffect);
 
-                // Add Frostbite to Frozen Lance's description by copying the description override from Flash Freeze
+                // Remove the override description key, so we can replace the card's description with our own
                 prop = typeof(CardData).GetField("overrideDescriptionKey", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                prop.SetValue(setCardData, "CardData_overrideDescriptionKey-4486d0ea967ad410-705ea064154a2624a8e7af1aabc85bb1-v2");
+                prop.SetValue(setCardData, "");
 
-                // Set Frozen Lance's damage to 2
+                // Set a custom card description
+                var customDescTrait = new CardTraitDataBuilder
+                {
+                    TraitStateName = "CardTraitCustomDescription",
+                    ParamStr = "<size=50%><br><br></size>Deal [effect0.power] damage to the front enemy unit and apply [frostbite] [effect1.status0.power]"
+                }.Build();
+                setCardData.GetTraits().Add(customDescTrait);
+
+                // Set Frozen Lance's damage to 4967
                 prop = typeof(CardEffectData).GetField("paramInt", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                 prop.SetValue(setCardData.GetEffects()[0], 4967);
             }

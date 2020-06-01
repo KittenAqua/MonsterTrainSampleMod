@@ -19,6 +19,16 @@ namespace MonsterTrainTestMod.SamplePatches
         }
     }
 
+    [HarmonyPatch(typeof(SaveManager), "SetupRun")]
+    class AddToStartingDeck2
+    {
+        // Creates a 0-cost 3/4 with Train Steward's card art
+        static void Postfix(ref SaveManager __instance)
+        {
+            __instance.AddCardToDeck(CustomCardManager.GetCardDataByID("NotHornBreak"));
+        }
+    }
+
     class NotHornBreakDataCreator
     {
         public static void CreateCardData(AllGameData allGameData)
@@ -28,15 +38,15 @@ namespace MonsterTrainTestMod.SamplePatches
                 CardID = "NotHornBreak",
                 Name = "Not Horn Break",
                 Cost = 2,
-                OverrideDescriptionKey = "CardData_overrideDescriptionKey-4486d0ea967ad410-705ea064154a2624a8e7af1aabc85bb1-v2",
                 TargetsRoom = true,
                 Targetless = false
             };
+
             cardDataBuilder.CreateAndSetCardArtPrefabVariantRef(
                 "Assets/GameData/CardArt/Portrait_Prefabs/CardArt_Spell_FlashFreeze.prefab",
                 "52471f4f40ea12d4a9a80a91f211fd07"
             );
-            cardDataBuilder.SetCardClan(MTClan.Awoken, allGameData);
+            cardDataBuilder.SetCardClan(MTClan.Awoken);
             cardDataBuilder.AddToCardPool(MTCardPool.StandardPool);
 
             var damageEffectBuilder = new CardEffectDataBuilder
@@ -47,13 +57,18 @@ namespace MonsterTrainTestMod.SamplePatches
             };
             cardDataBuilder.Effects.Add(damageEffectBuilder.Build());
 
-            var frostbiteEffectBuilder = new CardEffectDataBuilder
+            var piercingTrait = new CardTraitDataBuilder
             {
-                EffectStateName = "CardEffectAddStatusEffect",
-                TargetMode = TargetMode.LastTargetedCharacters
-            };
-            frostbiteEffectBuilder.AddStatusEffect(MTStatusEffect.Poison, 14);
-            cardDataBuilder.Effects.Add(frostbiteEffectBuilder.Build());
+                TraitStateName = "CardTraitIgnoreArmor"
+            }.Build();
+            cardDataBuilder.Traits.Add(piercingTrait);
+
+            var customDescTrait = new CardTraitDataBuilder
+            {
+                TraitStateName = "CardTraitCustomDescription",
+                ParamStr = "<size=50%><br><br></size>Deal [effect0.power] damage"
+            }.Build();
+            cardDataBuilder.Traits.Add(customDescTrait);
 
             cardDataBuilder.BuildAndRegister();
         }
