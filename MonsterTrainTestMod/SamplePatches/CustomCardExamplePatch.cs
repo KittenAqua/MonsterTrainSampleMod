@@ -28,7 +28,7 @@ namespace MonsterTrainTestMod.SamplePatches
                 CardID = "NotHornBreak",
                 Name = "Not Horn Break",
                 Cost = 2,
-                OverrideDescriptionKey = "CardData_overrideDescriptionKey-cea726817805edf9-cb7f8f1805d4cd4449185ec893355baa-v2",
+                OverrideDescriptionKey = "CardData_overrideDescriptionKey-4486d0ea967ad410-705ea064154a2624a8e7af1aabc85bb1-v2",
                 TargetsRoom = true,
                 Targetless = false
             };
@@ -39,16 +39,21 @@ namespace MonsterTrainTestMod.SamplePatches
             cardDataBuilder.SetCardClan(MTClan.Awoken, allGameData);
             cardDataBuilder.AddToCardPool(MTCardPool.StandardPool);
 
-            var damageEffect = new CardEffectData();
-            AccessTools.Field(typeof(CardEffectData), "effectStateName")
-                .SetValue(damageEffect, "CardEffectDamage");
-            AccessTools.Field(typeof(CardEffectData), "paramInt")
-                .SetValue(damageEffect, 12);
-            AccessTools.Field(typeof(CardEffectData), "targetMode")
-                .SetValue(damageEffect, TargetMode.DropTargetCharacter);
-            AccessTools.Field(typeof(CardEffectData), "targetModeStatusEffectsFilter")
-                .SetValue(damageEffect, new String[0]);
-            cardDataBuilder.Effects.Add(damageEffect);
+            var damageEffectBuilder = new CardEffectDataBuilder
+            {
+                EffectStateName = "CardEffectDamage",
+                ParamInt = 12,
+                TargetMode = TargetMode.DropTargetCharacter
+            };
+            cardDataBuilder.Effects.Add(damageEffectBuilder.Build());
+
+            var frostbiteEffectBuilder = new CardEffectDataBuilder
+            {
+                EffectStateName = "CardEffectAddStatusEffect",
+                TargetMode = TargetMode.LastTargetedCharacters
+            };
+            frostbiteEffectBuilder.AddStatusEffect(MTStatusEffect.Poison, 14);
+            cardDataBuilder.Effects.Add(frostbiteEffectBuilder.Build());
 
             cardDataBuilder.BuildAndRegister();
         }
