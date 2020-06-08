@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HarmonyLib;
-using MonsterTrainModdingAPI.Builder;
+using MonsterTrainModdingAPI.Builders;
 
 namespace MonsterTrainTestMod.SamplePatches
 {

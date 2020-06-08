@@ -26,7 +26,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="MonsterTrainModdingAPI">
-      <HintPath>..\..\BepInEx\plugins\MonsterTrainModdingAPI\MonsterTrainModdingAPI.dll</HintPath>
+      <HintPath>..\..\BepInEx\plugins\netstandard2.0\MonsterTrainModdingAPI.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Addressables">
@@ -40,6 +40,10 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\MonsterTrain_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\MonsterTrain_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\MonsterTrain_Data\Managed\UnityEngine.UI.dll</HintPath>

@@ -2,73 +2,48 @@
 using System.Collections.Generic;
 using System.Text;
 using HarmonyLib;
-using MonsterTrainModdingAPI.Builder;
+using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
-using MonsterTrainModdingAPI.Enum;
+using MonsterTrainModdingAPI.Enums;
 
 namespace MonsterTrainTestMod.SamplePatches
 {
-    [HarmonyPatch(typeof(SaveManager), "Initialize")]
-    class RegisterNotHornBreak
-    {
-        // Creates a 2-cost, 12 damage Awoken spell named "Not Horn Break" with Flash Freeze's art
-        static void Postfix(ref SaveManager __instance)
-        {
-            AllGameData allGameData = __instance.GetAllGameData();
-            NotHornBreakDataCreator.CreateCardData(allGameData);
-        }
-    }
-
-    [HarmonyPatch(typeof(SaveManager), "SetupRun")]
-    class AddToStartingDeck2
-    {
-        // Creates a 0-cost 3/4 with Train Steward's card art
-        static void Postfix(ref SaveManager __instance)
-        {
-            __instance.AddCardToDeck(CustomCardManager.GetCardDataByID("NotHornBreak"));
-        }
-    }
-
     class NotHornBreakDataCreator
     {
-        public static void CreateCardData(AllGameData allGameData)
+        public static void RegisterCard()
         {
             CardDataBuilder cardDataBuilder = new CardDataBuilder
             {
-                CardID = "NotHornBreak",
+                CardID = "TestMod_NotHornBreak",
                 Name = "Not Horn Break",
+                Description = "Deal [effect0.power] damage",
                 Cost = 2,
                 TargetsRoom = true,
-                Targetless = false
+                Targetless = false,
+                Clan = MTClan.Awoken,
+                CardPoolIDs = new List<int> { CardPoolIDs.GetCardPoolID(MTCardPool.StandardPool) },
+                EffectBuilders = new List<CardEffectDataBuilder>
+                {
+                    new CardEffectDataBuilder
+                    {
+                        EffectStateName = "CardEffectDamage",
+                        ParamInt = 12,
+                        TargetMode = TargetMode.DropTargetCharacter
+                    }
+                },
+                TraitBuilders = new List<CardTraitDataBuilder>
+                {
+                    new CardTraitDataBuilder
+                    {
+                        TraitStateName = "CardTraitIgnoreArmor"
+                    }
+                }
             };
 
             cardDataBuilder.CreateAndSetCardArtPrefabVariantRef(
                 "Assets/GameData/CardArt/Portrait_Prefabs/CardArt_Spell_FlashFreeze.prefab",
                 "52471f4f40ea12d4a9a80a91f211fd07"
             );
-            cardDataBuilder.SetCardClan(MTClan.Awoken);
-            cardDataBuilder.AddToCardPool(MTCardPool.StandardPool);
-
-            var damageEffectBuilder = new CardEffectDataBuilder
-            {
-                EffectStateName = "CardEffectDamage",
-                ParamInt = 12,
-                TargetMode = TargetMode.DropTargetCharacter
-            };
-            cardDataBuilder.Effects.Add(damageEffectBuilder.Build());
-
-            var piercingTrait = new CardTraitDataBuilder
-            {
-                TraitStateName = "CardTraitIgnoreArmor"
-            }.Build();
-            cardDataBuilder.Traits.Add(piercingTrait);
-
-            var customDescTrait = new CardTraitDataBuilder
-            {
-                TraitStateName = "CardTraitCustomDescription",
-                ParamStr = "<size=50%><br><br></size>Deal [effect0.power] damage"
-            }.Build();
-            cardDataBuilder.Traits.Add(customDescTrait);
 
             cardDataBuilder.BuildAndRegister();
         }

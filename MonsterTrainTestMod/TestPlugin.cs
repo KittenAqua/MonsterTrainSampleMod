@@ -5,9 +5,13 @@ using BepInEx.Harmony;
 using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using ShinyShoe;
 using MonsterTrainModdingAPI;
+using MonsterTrainModdingAPI.Interfaces;
+using MonsterTrainTestMod.SamplePatches;
+using System.IO;
 
 namespace MonsterTrainModdingAPI
 {
@@ -16,12 +20,15 @@ namespace MonsterTrainModdingAPI
     [BepInProcess("MonsterTrain.exe")]
     [BepInProcess("MtLinkHandler.exe")]
     [BepInDependency("api.modding.train.monster")]
-    public class TestPlugin : BaseUnityPlugin
+    public class TestPlugin : BaseUnityPlugin, IInitializable
     {
-        void Awake()
+        public void Initialize()
         {
             var harmony = new Harmony("com.name.package.generic");
             harmony.PatchAll();
+
+            NotHornBreakDataCreator.RegisterCard();
+            BlueEyesDataCreator.RegisterCard();
         }
     }
 }
