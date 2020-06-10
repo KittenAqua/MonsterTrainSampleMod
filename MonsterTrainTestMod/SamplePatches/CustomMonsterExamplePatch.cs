@@ -4,7 +4,7 @@ using System.Text;
 using HarmonyLib;
 using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
-using MonsterTrainModdingAPI.Enums;
+using MonsterTrainModdingAPI.Enums.MTCardPools;
 using System.Linq;
 using UnityEngine;
 
@@ -33,7 +33,7 @@ namespace MonsterTrainTestMod.SamplePatches
                 TargetsRoom = true,
                 Targetless = false,
                 AssetPath = "netstandard2.0/blueeyes.png",
-                CardPoolIDs = new List<int> { CardPoolIDs.GetCardPoolID(MTCardPool.AwokenBannerPool) },
+                CardPoolIDs = new List<string> { MTCardPoolIDs.GetIDForType(typeof(MTCardPool_UnitsAllBanner)) },
                 EffectBuilders = new List<CardEffectDataBuilder>
                 {
                     new CardEffectDataBuilder

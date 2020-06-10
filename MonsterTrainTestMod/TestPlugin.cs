@@ -26,9 +26,9 @@ namespace MonsterTrainModdingAPI
         {
             var harmony = new Harmony("com.name.package.generic");
             harmony.PatchAll();
-
             NotHornBreakDataCreator.RegisterCard();
             BlueEyesDataCreator.RegisterCard();
+            WimpcicleDataCreator.RegisterRelic();
         }
     }
 }

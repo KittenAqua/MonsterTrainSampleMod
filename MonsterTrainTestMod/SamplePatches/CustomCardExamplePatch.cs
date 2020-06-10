@@ -4,6 +4,8 @@ using System.Text;
 using HarmonyLib;
 using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
+using MonsterTrainModdingAPI.Enums.MTCardPools;
+using MonsterTrainModdingAPI.Enums.MTClans;
 using MonsterTrainModdingAPI.Enums;
 
 namespace MonsterTrainTestMod.SamplePatches
@@ -20,8 +22,8 @@ namespace MonsterTrainTestMod.SamplePatches
                 Cost = 2,
                 TargetsRoom = true,
                 Targetless = false,
-                Clan = MTClan.Awoken,
-                CardPoolIDs = new List<int> { CardPoolIDs.GetCardPoolID(MTCardPool.StandardPool) },
+                ClanID = MTClanIDs.GetIDForType(typeof(MTClan_Awoken)),
+                CardPoolIDs = new List<string> { MTCardPoolIDs.GetIDForType(typeof(MTCardPool_MegaPool)) },
                 EffectBuilders = new List<CardEffectDataBuilder>
                 {
                     new CardEffectDataBuilder
