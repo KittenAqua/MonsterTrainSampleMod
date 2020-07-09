@@ -4,7 +4,7 @@ using System.Text;
 using HarmonyLib;
 using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
-using MonsterTrainModdingAPI.Enums.MTCardPools;
+using MonsterTrainModdingAPI.Constants;
 using System.Linq;
 using UnityEngine;
 
@@ -30,10 +30,12 @@ namespace MonsterTrainTestMod.SamplePatches
                 Name = "Blue-Eyes White Dragon",
                 Cost = 0,
                 CardType = CardType.Monster,
+                Rarity = CollectableRarity.Uncommon,
                 TargetsRoom = true,
                 Targetless = false,
-                AssetPath = "netstandard2.0/blueeyes.png",
-                CardPoolIDs = new List<string> { MTCardPoolIDs.GetIDForType(typeof(MTCardPool_UnitsAllBanner)) },
+                AssetPath = "MonsterTrainTestMod/blueeyes.png",
+                ClanID = "TestMod_TestClan",
+                CardPoolIDs = new List<string> { VanillaCardPoolIDs.UnitsAllBanner },
                 EffectBuilders = new List<CardEffectDataBuilder>
                 {
                     new CardEffectDataBuilder
@@ -47,7 +49,7 @@ namespace MonsterTrainTestMod.SamplePatches
                             Size = 5,
                             Health = 2500,
                             AttackDamage = 3000,
-                            AssetPath = "netstandard2.0/blueeyes_character.png"
+                            AssetPath = "MonsterTrainTestMod/blueeyes_character.png"
                         }
                     }
                 },

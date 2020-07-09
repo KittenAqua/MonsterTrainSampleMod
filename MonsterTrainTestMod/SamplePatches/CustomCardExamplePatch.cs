@@ -4,26 +4,26 @@ using System.Text;
 using HarmonyLib;
 using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
-using MonsterTrainModdingAPI.Enums.MTCardPools;
-using MonsterTrainModdingAPI.Enums.MTClans;
 using MonsterTrainModdingAPI.Enums;
+using MonsterTrainModdingAPI.Constants;
 
 namespace MonsterTrainTestMod.SamplePatches
 {
     class NotHornBreakDataCreator
     {
-        public static void RegisterCard()
+        public static void RegisterCard(string id, CollectableRarity rarity)
         {
             CardDataBuilder cardDataBuilder = new CardDataBuilder
             {
-                CardID = "TestMod_NotHornBreak",
-                Name = "Not Horn Break",
+                CardID = id,
+                Name = id,
                 Description = "Deal [effect0.power] damage",
                 Cost = 2,
+                Rarity = rarity,
                 TargetsRoom = true,
                 Targetless = false,
-                ClanID = MTClanIDs.GetIDForType(typeof(MTClan_Awoken)),
-                CardPoolIDs = new List<string> { MTCardPoolIDs.GetIDForType(typeof(MTCardPool_MegaPool)) },
+                ClanID = "TestMod_TestClan",
+                CardPoolIDs = new List<string> { VanillaCardPoolIDs.MegaPool },
                 EffectBuilders = new List<CardEffectDataBuilder>
                 {
                     new CardEffectDataBuilder

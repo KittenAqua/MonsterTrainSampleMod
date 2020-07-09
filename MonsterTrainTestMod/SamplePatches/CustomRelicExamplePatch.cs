@@ -4,8 +4,6 @@ using System.Text;
 using HarmonyLib;
 using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
-using MonsterTrainModdingAPI.Enums.MTCardPools;
-using MonsterTrainModdingAPI.Enums.MTClans;
 using MonsterTrainModdingAPI.Enums;
 
 namespace MonsterTrainTestMod.SamplePatches
@@ -14,17 +12,17 @@ namespace MonsterTrainTestMod.SamplePatches
     {
         public static void RegisterRelic()
         {
-            CardPool cardPool = new CardPool();
+            CardPool cardPool = UnityEngine.ScriptableObject.CreateInstance<CardPool>();
             var cardDataList = (Malee.ReorderableArray<CardData>)AccessTools.Field(typeof(CardPool), "cardDataList").GetValue(cardPool);
             var trainSteward = CustomCardManager.SaveManager.GetAllGameData().FindCardData("d14a50f3-728d-43e1-87f0-ef1b013f6678");
             cardDataList.Add(trainSteward);
 
             new CollectableRelicDataBuilder
             {
-                CollectableRelicID = "AddTrainStewardToHand",
+                CollectableRelicID = "TestMod_Wimpcicle",
                 Name = "Wimp-cicle",
                 Description = "At the start of your turn, add a Train Steward to your hand",
-                AssetPath = "netstandard2.0/wimpcicle.png",
+                AssetPath = "MonsterTrainTestMod/wimpcicle.png",
                 EffectBuilders = new List<RelicEffectDataBuilder>
                 {
                     new RelicEffectDataBuilder
