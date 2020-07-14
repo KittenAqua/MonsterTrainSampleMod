@@ -7,6 +7,7 @@ using MonsterTrainModdingAPI.Managers;
 using MonsterTrainModdingAPI.Constants;
 using System.Linq;
 using UnityEngine;
+using static MonsterTrainModdingAPI.Constants.VanillaCardPoolIDs;
 
 namespace MonsterTrainTestMod.SamplePatches
 {
@@ -35,7 +36,7 @@ namespace MonsterTrainTestMod.SamplePatches
                 Targetless = false,
                 AssetPath = "MonsterTrainTestMod/blueeyes.png",
                 ClanID = "TestMod_TestClan",
-                CardPoolIDs = new List<string> { VanillaCardPoolIDs.UnitsAllBanner },
+                CardPoolIDs = new List<string> { UnitsAllBanner },
                 EffectBuilders = new List<CardEffectDataBuilder>
                 {
                     new CardEffectDataBuilder

@@ -53,14 +53,6 @@ namespace MonsterTrainTestMod.SamplePatches
                 prop = typeof(CardData).GetField("overrideDescriptionKey", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                 prop.SetValue(setCardData, "");
 
-                // Set a custom card description
-                var customDescTrait = new CardTraitDataBuilder
-                {
-                    TraitStateName = "CardTraitCustomDescription",
-                    ParamStr = "<size=50%><br><br></size>Deal [effect0.power] damage to the front enemy unit and apply [frostbite] [effect1.status0.power]"
-                }.Build();
-                setCardData.GetTraits().Add(customDescTrait);
-
                 // Set Frozen Lance's damage to 4967
                 prop = typeof(CardEffectData).GetField("paramInt", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                 prop.SetValue(setCardData.GetEffects()[0], 4967);

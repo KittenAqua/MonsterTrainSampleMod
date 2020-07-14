@@ -22,6 +22,7 @@ namespace MonsterTrainTestMod.SamplePatches
                 CollectableRelicID = "TestMod_Wimpcicle",
                 Name = "Wimp-cicle",
                 Description = "At the start of your turn, add a Train Steward to your hand",
+                RelicPoolIDs = new List<string> { MonsterTrainModdingAPI.Constants.VanillaRelicPoolIDs.MegaRelicPool },
                 AssetPath = "MonsterTrainTestMod/wimpcicle.png",
                 EffectBuilders = new List<RelicEffectDataBuilder>
                 {

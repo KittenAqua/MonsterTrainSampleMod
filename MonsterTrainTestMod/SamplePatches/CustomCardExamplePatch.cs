@@ -5,7 +5,7 @@ using HarmonyLib;
 using MonsterTrainModdingAPI.Builders;
 using MonsterTrainModdingAPI.Managers;
 using MonsterTrainModdingAPI.Enums;
-using MonsterTrainModdingAPI.Constants;
+using static MonsterTrainModdingAPI.Constants.VanillaCardPoolIDs;
 
 namespace MonsterTrainTestMod.SamplePatches
 {
@@ -23,7 +23,7 @@ namespace MonsterTrainTestMod.SamplePatches
                 TargetsRoom = true,
                 Targetless = false,
                 ClanID = "TestMod_TestClan",
-                CardPoolIDs = new List<string> { VanillaCardPoolIDs.MegaPool },
+                CardPoolIDs = new List<string> { MegaPool },
                 EffectBuilders = new List<CardEffectDataBuilder>
                 {
                     new CardEffectDataBuilder
