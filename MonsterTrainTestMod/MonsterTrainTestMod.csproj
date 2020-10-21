@@ -5,28 +5,28 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\BepInEx\plugins</OutputPath>
+    <OutDir>..\..\..\..\workshop\content\1102190\MonsterTrainTestMod\plugins</OutDir>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\BepInEx\core\0Harmony.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\workshop\content\1102190\2187468759\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\MonsterTrain_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\BepInEx\core\BepInEx.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\workshop\content\1102190\2187468759\BepInEx\core\BepInEx.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>..\..\BepInEx\core\BepInEx.Harmony.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\workshop\content\1102190\2187468759\BepInEx\core\BepInEx.Harmony.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    <Reference Include="MonsterTrainModdingAPI">
-      <HintPath>..\..\BepInEx\plugins\netstandard2.0\MonsterTrainModdingAPI.dll</HintPath>
+    <Reference Include="TrainworksModdingTools">
+      <HintPath>..\..\..\..\workshop\content\1102190\TrainworksModdingTools\plugins\TrainworksModdingTools.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Unity.Addressables">
@@ -39,15 +39,7 @@
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\MonsterTrain_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\..\MonsterTrain_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\MonsterTrain_Data\Managed\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
 
