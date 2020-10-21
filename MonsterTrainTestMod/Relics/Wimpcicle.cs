@@ -17,10 +17,14 @@ namespace MonsterTrainTestMod.SamplePatches
 
         public static void BuildAndRegister()
         {
-            CardPool cardPool = UnityEngine.ScriptableObject.CreateInstance<CardPool>();
-            var cardDataList = (Malee.ReorderableArray<CardData>)AccessTools.Field(typeof(CardPool), "cardDataList").GetValue(cardPool);
-            var trainSteward = CustomCardManager.GetCardDataByID(VanillaCardIDs.TrainSteward);
-            cardDataList.Add(trainSteward);
+            var cardPool = new CardPoolBuilder
+            {
+                CardPoolID = TestPlugin.GUID + "_TrainStewardCardPool",
+                CardIDs = new List<string>
+                {
+                    VanillaCardIDs.TrainSteward
+                }
+            }.BuildAndRegister();
 
             new CollectableRelicDataBuilder
             {
