@@ -31,7 +31,7 @@ namespace MonsterTrainModding
     {
         public const string GUID = "com.name.package.generic";
         public const string NAME = "Test Plugin";
-        public const string VERSION = "0.0.9.3";
+        public const string VERSION = "1.0.0";
 
         private void Awake()
         {
